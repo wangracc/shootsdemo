@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>升级</title>
+
+  <!-- Bootstrap -->
+  <link href="//cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" rel="stylesheet">
+
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+      <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+  <div class="container-fluid" style="padding:20px">
+    <form class="form-inline" method="post" id="fmUpgrade">
+      <div class="form-group">
+        <label class="sr-only" for="exampleInputEmail3">Email address</label>
+        <input type="email" class="form-control" name="username" id="username" placeholder="Email">
+      </div>
+      <div class="form-group">
+        <label class="sr-only" for="exampleInputPassword3">Password</label>
+        <input type="password" class="form-control" name="pwd" id="password" placeholder="Password">
+      </div>
+      <button type="button" id="btnUpgrade" data-loading-text="升级中..." class="btn btn-primary" autocomplete="off">
+  开始升级
+</button>
+    </form>
+    <div id="log"></div>
+  </div>
+
+
+  <script src="//cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+  <script src="//cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="//cdn.bootcss.com/socket.io/2.0.2/socket.io.js"></script>
+  <script type="text/javascript">
+    $(function() {
+      $('#btnUpgrade').on('click', function() {
+
+        var name = $("#username").val();
+        var pwd = $("#password").val();
+        var title = document.title;
+        var $btn = $(this).button('loading');
+        $.ajax({
+          type: "POST",
+          dataType: 'json',
+          contentType: 'application/json',
+          data: JSON.stringify({
+            name: name,
+            pwd: pwd
+          }),
+          beforeSend: function() {
+            document.title = "升级中，请稍后(不要刷新页面)...";
+          },
+          complete: function() {
+            document.title = title;
+          },
+          success: function(res) {
+            if (res && res.errcode == 0) {
+              $('#log').text(res.errmsg);
+              setTimeout(checkUpgrade, 60000);
+            } else {
+              $('#log').text(JSON.stringify(res, null, 4));
+            }
+          },
+          error: function(xhr, status, error) {
+            $('#log').text(JSON.stringify(res, null, 4));
+            $btn.button('reset');
+          }
+        });
+      });
+
+      function checkUpgrade() {
+        var timer = setInterval(function() {
+          $.get('/shoots/ping', function(res) {
+            console.log(res);
+            if (res.msg === 'ok') {
+              clearInterval(timer);
+              $('#btnUpgrade').button('reset');
+              $('#log').text("升级完成，请检查升级是否成功")
+            }
+          })
+        }, 3000)
+      }
+    });
+  </script>
+</body>
+
+</html>

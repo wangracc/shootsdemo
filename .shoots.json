@@ -1,0 +1,7 @@
+{
+    "Name": "shoots_demo",
+    "Mongo": {
+        "Url": "mongodb://shoots_shoots_demo_5baaff0b70201:nSDyJZ@121.43.175.197:10002/shoots_shoots_demo_5baaff0b70201",
+        "Name": "shoots_shoots_demo_5baaff0b70201"
+    }
+}

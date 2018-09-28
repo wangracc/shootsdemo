@@ -1,0 +1,18 @@
+web:
+  image: hub.qyhub.cn/qyhub/shoots:1.0
+  container_name: "example"
+  ports:
+    - "127.0.0.1:8001:3000"
+  environment:
+    - "NODE_ENV=production"
+    - "ROOT_URL=http://exmaple.qyhub.cn"
+    - "PORT=3000"
+    - "DOMAIN=exmaple.qyhub.cn"
+    - "GIT_REMOTE_URL=http://git.xfruit.cn:82/peach/exmaple.git"
+    - "GIT_USER=zhangzhibo@xfruit.cn"
+    - "GIT_PASSWORD=password"
+    - "GIT_URL=http://zhangzhibo%40xfruit.cn:password@git.xfruit.cn:82/peach/exmaple.git"
+    - "MONGO_URL=mongodb://127.0.0.1:27017/example"
+    - "MONGO_DBNAME=example"
+    - "PRD=true"
+  restart: always
