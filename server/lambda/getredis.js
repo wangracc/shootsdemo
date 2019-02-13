@@ -2,9 +2,8 @@ const shootsRedis =  require('../lib/redis')
 module.exports = async function(params,ctx){
     console.log(params);
 
-    //第一次提交
-    //第二次提交
-    //第三次提交
+    //m1
+    //m2
     let key;
    try{
        key = params.key;
