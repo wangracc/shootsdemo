@@ -13,5 +13,6 @@ module.exports = async function(params,ctx){
     console.log("test分支新增的内容");
      let res=await redis.get(key);
      console.log(res);
+     //这里是fea1分支新增的内容
      return ctx.succeed(res);
 }
