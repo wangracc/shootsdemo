@@ -3,6 +3,7 @@ module.exports = async function(params,ctx){
     console.log(params);
 
    //t1
+//    t2
     let key;
    try{
        key = params.key;
