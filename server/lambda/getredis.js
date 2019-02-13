@@ -15,6 +15,8 @@ module.exports = async function(params,ctx){
    //first push
    //second push
    //third push
+
+   //wds
     let redis = shootsRedis();
      let res=await redis.get(key);
      console.log(res);
