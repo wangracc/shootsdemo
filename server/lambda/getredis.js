@@ -2,6 +2,7 @@ const shootsRedis =  require('../lib/redis')
 module.exports = async function(params,ctx){
     console.log(params);
     let key;
+    console.log("dev分支新增的内容")
    try{
        key = params.key;
    } catch(err){
