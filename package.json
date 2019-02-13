@@ -56,7 +56,8 @@
         "simple-git": "1.73.0",
         "soap": "0.16.0",
         "socket.io": "2.0.3",
-        "validator": "5.4.0"
+        "validator": "5.4.0",
+        "ioredis": "^4.2.0"
     },
     "devDependencies": {
         "nodemon": "1.9.2"

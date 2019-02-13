@@ -1,13 +1,15 @@
 {
-    "apps": [{
-        "name": "shoots",
-        "script": "../.shoots/bin/run.js",
-        "watch": false,
-        "instances": 1,
-        "log_date_format": "YYYY-MM-DD HH:mm Z",
-        "env": {
-            "NODE_ENV": "production",
-            "PORT":4000
+    "apps": [
+        {
+            "name": "shoots",
+            "script": "./.shoots/bin/run.js",
+            "watch": false,
+            "instances": 4,
+            "log_date_format": "YYYY-MM-DD HH:mm Z",
+            "env": {
+                "NODE_ENV": "PRD",
+                "PORT": 4000
+            }
         }
-    }]
+    ]
 }
